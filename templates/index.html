@@ -1,0 +1,34 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#get-news-btn').click(function() {
+                var selectedDate = $('#date').val();
+                $.ajax({
+                    url: '/get_news',
+                    type: 'POST',
+                    data: { date: selectedDate },
+                    success: function(response) {
+                        $('#news-container').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Select a Date</h1>
+    <input type="date" id="date" name="date">
+    <input type="submit" id="get-news-btn" value="Get News">
+    <div id="news-container"></div>
+</body>
+</html>
