@@ -1,0 +1,23 @@
+<!-- templates/news.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if news %}
+        <div class="card-container">
+            {% for article in news %}
+                <div class="card">
+                    <h3>{{ article['title'] }}</h3>
+                    <p>{{ article['description'] }}</p>
+                    <a href="{{ article['url'] }}" target="_blank">Read More</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No news articles available for the selected date.</p>
+    {% endif %}
+</body>
+</html>
